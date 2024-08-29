@@ -1,0 +1,627 @@
+* {
+    font-family: "Raleway", Arial, Helvetica, sans-serif;
+    transition: ease-in-out 0.1s;
+}
+
+input {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: rgb(68, 68, 68);
+    outline-width: 5px;
+    outline-color: purple;
+}
+
+button {
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+    border-radius: 25px;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    background-color: rebeccapurple;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(132, 80, 185);
+    transition: ease-in-out 0.3s;
+}
+
+main {
+    display: flex;
+    justify-content: start;
+    background-color: beige;
+    height: 100vh;
+}
+
+sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 10vw;
+    background-color: rgb(255, 255, 255);
+}
+
+/* LOGIN STYLES 
+===========================================
+*/
+
+.entryContainer {
+    background-color: rgb(116, 116, 116);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh
+}
+
+.enterForm {
+    position: absolute;
+    left: 23vw;
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    height: 70vh;
+    width: 50vw;
+    overflow-y: hidden;
+}
+
+.formBox {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 25vw;
+    height: 60vh;
+}
+
+.formBoxAfter {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 25vw;
+    height: 50vh;
+    animation: moveForm2 1s forwards;
+}
+
+.formBoxReturn {
+   
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 25vw;
+    height: 50vh;
+    animation: return2 1s forwards;
+}
+
+.formBox h1 {
+    color: rgb(100, 57, 143);
+}
+
+.greetBox {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    left: 50vw;
+    padding: 30px;
+    border-radius: 15px;
+    height: 70vh;
+    width: 25vw;
+}
+
+.greetBoxAfter {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    left: 20vw;
+    padding: 30px;
+    border-radius: 15px;
+    height: 70vh;
+    width: 25vw;
+    animation: moveForm 0.8s forwards;
+}
+
+.greetBoxReturn {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    left: 50vw;
+    padding: 30px;
+    border-radius: 15px;
+    height: 70vh;
+    width: 25vw;
+    animation: return 0.8s forwards;
+}
+
+.greetings {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 500;
+    padding: 10px;
+}
+
+.phrase {
+    color: #fff;
+    font-size: 18px;
+    padding: 10px;
+}
+
+.pageTitle {
+    background-color: rgb(148, 58, 143);
+    width: 150px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    color: #fff;
+    cursor: default;
+}
+
+/* HOME PAGE
+===========================================
+*/
+
+.homePage {
+    display: flex;
+    justify-content: space-between;
+    overflow-y: hidden;
+}
+
+/* CHATS STYLES 
+===========================================
+*/
+
+.sidebarOpt {
+    cursor: pointer;
+    padding: 30px 30px;
+    color: #D0B7D1;
+}
+
+
+.chats, .users {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 95vh;
+    left: 10vw;
+    margin: 15px;
+}
+
+.chatBttn {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 5px;
+    width: 34vw;
+    height: 10vh;
+    transition: ease-in-out 0.3s;
+}
+
+.chatBttn:hover {
+    background-color: beige;
+}
+
+.chatBttnUsr {
+    color: rgb(148, 58, 143);
+    font-weight: bold;
+    padding: 5px;
+}
+
+.msg {
+    color: grey;
+    padding: 5px;
+}
+
+/* CHAT DISPLAY */
+
+.chatDisplay, .userInfo { 
+    display: flex;
+    flex-direction: column;
+    width: 50vw;
+    height: 100vh;
+    animation: chatEntrance 0.3s forwards;
+}
+
+.singleChatProfilePic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 20px;
+}
+
+.userInfo, .userInfo header {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.userInfoOptions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    cursor: pointer;
+    transition: ease-in-out 0.5s;
+}
+
+.chatHeader {
+    background-color: #b98fa1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 12vh;
+    width: 100%;
+    cursor: default;
+}
+
+.closeBttn {
+    font-size: 45px;
+    color:#aa3bad;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.closeBttn:hover {
+    color:#ce31fd;
+}
+
+.userChatName {
+    font-weight: bold;
+    color: #ffffff;
+    font-size: 20px;
+    padding: 5px 0px;
+}
+
+.userChatStatus {
+    color: rgb(223, 223, 223);
+}
+
+.newChats {
+    display: flex;
+    align-items: center;
+}
+
+.newChats div {
+    cursor: pointer;
+    color: rgb(49, 175, 91);
+    transition: ease-in-out 0.1s;
+}
+
+.newChats div:hover {
+    color: rgb(73, 201, 130);
+}
+
+/* CHAT BODY */
+
+.chatBody {
+    background: linear-gradient(to bottom, rgb(212, 165, 255), rgb(255, 255, 255));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 86vh;
+    padding: 5px;
+}
+
+.message {
+    display: block;
+    background-color: rgb(36, 35, 36);
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    max-width: 30vw;
+    line-break: normal;
+    word-wrap: break-word;
+}
+
+.msgs {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+}
+
+.msgs::-webkit-scrollbar,
+.chats::-webkit-scrollbar, 
+.users::-webkit-scrollbar {
+    width: 5px;
+}
+
+.msgs::-webkit-scrollbar-thumb,
+.chats::-webkit-scrollbar-thumb, 
+.users::-webkit-scrollbar-thumb {
+    background-color: rgb(138, 78, 197);
+    border-radius: 10px;
+}
+
+
+.day {
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    margin: 10px;
+    padding: 3px;
+    border-radius: 5px;
+    font-size: 13px;
+    background-color: rgb(180, 180, 180);
+    color: rgb(248, 248, 248);
+    width: 10vw;
+}
+
+.hour {
+    color: rgb(199, 199, 199);
+    font-size: 10px;
+    margin-left: 1vw;
+    margin-top: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: end;
+}
+
+.msg-box {
+    display: flex;
+}
+
+.send-button {
+    border-radius: 5px;
+    width: 6vw;
+}
+
+/* USERINFO DISPLAY */
+
+.profilePhoto {
+    width: 15vw !important;
+    height: 15vw !important;
+    border-radius: 50%;
+    object-fit: cover
+}
+
+.displayBio {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 46vw;
+    max-height: 20vh;
+    text-align: left;
+    background-color: #feedff;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.noBio {
+    margin-left: 2vw;
+    width: 50vw;
+}
+
+.closeUI {
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.about {
+    width: 48vw;
+    font-size: 15px;
+    padding: 5px;
+    color: grey;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50vw;
+    height: 10vh;
+    font-size: 40px;
+}
+
+.edit {
+    display: flex;
+    justify-content: end;
+    cursor: pointer;
+    color: rebeccapurple;
+    border-radius: 5px;
+    margin-right: 10px;
+    padding: 10px;
+    transition: ease-in-out 0.05s;
+}
+
+.edit:hover {
+    color: #aa3bad;
+}
+
+.nameEdit {
+    width: 40vw;
+    margin: 0;
+}
+
+.profilePicture {
+    display: flex;
+    cursor: pointer;
+}
+
+.camera {
+    position: absolute;
+    cursor: pointer;
+    top: 34vh;
+    left: 27vw;
+    color: rgb(56, 5, 56);
+    transition: ease-in-out 0.1s
+}
+
+.camera:hover {
+    color: rgb(90, 8, 90);
+}
+
+textarea {
+    width: 40vw;
+    height: 15vh;
+    outline: none;
+    padding: 10px;
+    border-radius: 5px;
+    border-color: rgb(179, 179, 179);
+}
+
+/* ======================================*/
+
+/* Others */
+
+.errorBox {
+    position: fixed;
+    color: #CC3535;
+    font-weight: 600;
+    top: 17%;
+    width: 20vw;
+    transition: ease-in-out 0.5s;
+}
+
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+    height: 100vh;
+}
+
+.empty img {
+    animation: emptyEntrance 0.3s linear;
+}
+
+.noMessages {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0.93;
+}
+
+.noMessages div {
+    background-color: rgb(221, 209, 226);
+    color: rgb(80, 80, 80);
+    width: 20vw;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.serverAnswer {
+    position: absolute;
+    top: 62vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(204, 204, 204);
+    color: green;
+    font-size: 15px;
+    width: 20vw;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px rgb(163, 163, 163);
+    animation: answerEntrance 0.5s linear;
+}
+
+/* ANIMATIONS 
+===========================================
+*/
+
+@keyframes moveForm {
+    0% {
+        left: 50vw;
+        width: 25vw;
+    }
+
+    40% {
+        width: 50vw;
+        left: 20vw;
+    }
+    
+    100% {
+        left: 20vw;
+        width: 25vw;
+    }
+}
+
+@keyframes moveForm2 {
+    from {
+        left: 25vw;
+    }
+
+    to {
+        left: 30vw;
+    }
+}
+
+@keyframes return {
+    0% {
+        left: 20vw;
+        width: 25vw;
+    }
+    
+    40% {
+        left: 20vw;
+        width: 50vw;
+    }
+
+    100% {
+        left: 50vw;
+        width: 25vw;
+    }
+}
+
+@keyframes return2 {
+    from {
+        left: 30vw;
+    }
+
+    to {
+        left: 5vw;
+    }
+}
+
+@keyframes chatEntrance {
+    from {
+        transform: translateY(-1000px);
+    }
+
+    to {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes emptyEntrance {
+    from {
+        transform: translateX(1000px);
+    }
+
+    to {
+        transform: translateX(0px);
+    }
+}
+
+@keyframes answerEntrance {
+    from {
+        transform: translateY(1000px);
+    } to {
+        transform: translateY(0px);
+    }
+}
