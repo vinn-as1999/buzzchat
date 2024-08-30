@@ -1,6 +1,9 @@
 # Project BuzzChat
 
-> **Warning:** This project is still in development and is not yet complete.
+<p>
+   <span style="color: #DF2929; font-weight: bold">NOTE:</span>
+   <span style="font-style: italic; color: #A7A7A7">This project is still in development and is not yet complete.</span>
+</p>
 
 ***
 
@@ -11,9 +14,14 @@
 
 ## Description
 
-This project is an open-source, simple React application for an online web chat, designed to make friends and have easy free conversations. It was created for my personal portfolio to improve my web development skills. The front end is built with React.js, and the back end uses Node.js with Express.
+<p style="font-weight: bold; color: #A7A7A7">
+   This project is an open-source, simple React application for an online web chat, designed to make friends and have easy free conversations. Created to improve my fullstack skills.
+</p>
+
 ---
-On this repository, you will find the front-end webpage of this project, where you can see all its functionalities and interact with the user interface. The front end is built using React and includes features like user authentication, profile management, and real-time chat.
+<p style="font-weight: bold; color: #A7A7A7">
+   On this repository, you will find the front-end webpage of this project, where you can see all its functionalities and interact with the user interface. The front end is built using React and includes features like user authentication, profile management, and real-time chat.
+</p>
 
 ## Installation
 
