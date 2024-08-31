@@ -42,8 +42,27 @@
 2. **Install the dependencies:**
 ```npm install```
 
-3. **Usage:**
-```npm run dev```
+3. **Clone the backend repository:**
+
+   - **Note:** *To use the frontend properly, you will also need to clone and set up the backend repository.*
+
+   ```bash
+   git clone https://github.com/vinn-as1999/buzzchat-backend
+
+   npm install
+   ```
+
+4. **Start the server:**
+   ```bash
+   npm start
+   ```
+
+5. **Usage:** 
+
+   On the frontend directory, start the development server.
+      ```
+      npm run dev
+      ```
 
 # Functionalities
 ***
