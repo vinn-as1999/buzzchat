@@ -6,16 +6,22 @@ import { IoCameraSharp } from 'react-icons/io5';
 import { GrSend } from 'react-icons/gr';
 
 const SelfProfile = (props) => {
+  
+  const [profiles, setProfiles] = useState(JSON.parse(localStorage.getItem('profiles')));
+  const mainUser = profiles.mainUser;
+
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [picPath, setPicPath] = useState('');
   const [name, setName] = useState('');
-  const [nameEdit, setNameEdit] = useState('');
-  const [bioEdit, setBioEdit] = useState('');
+  const [nameEdit, setNameEdit] = useState(profiles[mainUser].name);
+  const [bioEdit, setBioEdit] = useState(profiles[mainUser].bio);
   const [isEditing, setIsEditing] = useState(false);
 
-  const profiles = JSON.parse(localStorage.getItem('profiles'))
-  const mainUser = profiles.mainUser;
+  const fetchProfiles = () => {
+    const updatedProfiles = JSON.parse(localStorage.getItem('profiles'));
+    setProfiles(updatedProfiles);
+  };
 
   const sendProfileInfo = async (data) => {
     const url = `http://localhost:3333/api/setProfile`;
@@ -32,6 +38,8 @@ const SelfProfile = (props) => {
     setIsEditing(false);
     setNameEdit(info.name);
     setBioEdit(info.bio);
+
+    fetchProfiles()
   };
 
   const editProfile = () => {
@@ -91,8 +99,9 @@ const SelfProfile = (props) => {
   };
 
   useEffect(() => {
-    console.log('Profile successfully updated!')
-  }, [isEditing])
+    fetchProfiles();
+
+  }, [])
 
   return (
     <main className='userInfo'>
@@ -141,7 +150,7 @@ const SelfProfile = (props) => {
             />
           ) : (
             <section style={{fontSize: 30, padding: 5}}>
-              {profiles[mainUser].name}
+              {nameEdit}
             </section>
           )}
         </div>
@@ -166,7 +175,9 @@ const SelfProfile = (props) => {
               onChange={(e) => setBioEdit(e.target.value)}
             />
           ) : (
-            profiles[mainUser].bio
+            <div style={{whiteSpace: 'pre-line'}}>
+              {bioEdit}
+            </div>
           )}
         </div>
       </section>

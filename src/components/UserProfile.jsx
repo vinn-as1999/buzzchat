@@ -7,6 +7,10 @@ import { GrDislike } from "react-icons/gr"
 function UserProfile(props) {
   const username = props.displayChatName;
   const profiles = JSON.parse(localStorage.getItem('profiles'));
+
+  useEffect(() => {
+    console.log('A bio está aqui', profiles[username].bio)
+  }, [])
   
   return (
     <>
@@ -36,7 +40,7 @@ function UserProfile(props) {
         </section>
 
         <section className={props.profile.bio ? 'displayBio' : 'noBio'}>
-          <div style={{marginLeft: 10}}>
+          <div style={{whiteSpace: 'pre-line', marginLeft: 10}}>
             {profiles[username].bio}
           </div>
         </section>

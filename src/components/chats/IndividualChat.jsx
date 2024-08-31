@@ -178,6 +178,7 @@ const IndividualChat = (props) => {
       socket.off('message');
     };
   }, []);
+  
 
   return (
     <>
@@ -218,7 +219,7 @@ const IndividualChat = (props) => {
               {
                 props.empty === true ? (<NoMessages />) : props.histMsg.map((data, index) => (
                   <>
-                    <div>
+                    <div className='dayBallon'>
                     {
                       (index === 0 || props.histMsg[index - 1].day !== data.day) && (
                         <DisplayDay day={data.day} />

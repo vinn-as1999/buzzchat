@@ -55,7 +55,9 @@ const ChatBttn = (props) => {
         onClick={() => {getFriendId(); props.getMessages(localStorage.getItem(idRef))}}>
         <div style={{width: '10vh'}}>
           {
-            profiles[props.name] && profiles[props.name].picture ? <img style={{width: 50, height: 50}} src={profiles[props.name].picture} alt="profile picture" /> : 
+            profiles[props.name] && profiles[props.name].picture ? 
+            <img style={{width: 50, height: 50, borderRadius: '50%'}} 
+              src={profiles[props.name].picture} alt="profile picture" /> : 
             <FaUserCircle size={50} style={{
               margin: 10,
               color: '#D0D0D0'

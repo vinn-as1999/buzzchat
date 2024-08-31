@@ -143,7 +143,7 @@ const Home = (props) => {
 
 
     function addFriend(name) {
-        if (!name || name === profile.mainUser) {
+        if (!name || name === profile.mainUser || friends.includes(name)) {
             return;
         };
 
@@ -151,7 +151,6 @@ const Home = (props) => {
             const friendsArray = [...prev, name]
             localStorage.setItem('friends', JSON.stringify(friendsArray));
             return friendsArray;
-        
         });
     };
 
@@ -207,12 +206,12 @@ const Home = (props) => {
     <>
         <main className='homePage'>
             <sidebar>
-
                 <div className='sidebarOpt'
                     onClick={() => home.displayUserInfo(localStorage.getItem('id'))}
                     style={selfProfile === true ? conditionalStyle2 : conditionalStyle1}>
                     {
-                        profile[profile.mainUser] && profile[profile.mainUser].picture ? <img src={profile[profile.mainUser].picture} style={{width: 30, height: 30}} /> :
+                        profile[profile.mainUser] && profile[profile.mainUser].picture ? 
+                        <img src={profile[profile.mainUser].picture} style={{width: 40, height: 40, borderRadius: '50%'}} /> :
                         <FaUserCircle size={30} />
                     }
                 </div>
@@ -236,7 +235,6 @@ const Home = (props) => {
                     onClick={home.handleLogout}>
                     <TbLogout2 size={30} />
                 </div>
-                
             </sidebar>
 
             {
