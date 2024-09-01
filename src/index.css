@@ -61,7 +61,7 @@ sidebar {
 .enterForm {
     position: absolute;
     left: 23vw;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     padding: 30px;
     border-radius: 15px;
     height: 70vh;
@@ -342,7 +342,7 @@ sidebar {
 }
 
 .msgs {
-    overflow-y: scroll;
+    overflow-y: auto;
     scroll-behavior: smooth;
     display: flex;
     flex-direction: column;

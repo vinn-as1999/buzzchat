@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ChatBalloon from './ChatBalloon'
 import { FaUserCircle } from 'react-icons/fa'
 import { GrSend } from "react-icons/gr"
@@ -16,9 +16,7 @@ const IndividualChat = (props) => {
   const date = new Date();
 
   const [message, setMessage] = useState('');
-  const [sender, setSender] = useState();
-  const [day, setDay] = useState(getDay());
-  const [currentDay, setCurrentDay] = useState(false);
+  const scrollRef = useRef();
 
   const [ user_1, user_2 ] = [ localStorage.getItem('id'), localStorage.getItem('id2') ]
   const chatUser = props.displayChatName;
@@ -84,8 +82,8 @@ const IndividualChat = (props) => {
       props.setHistMsg(prev => [...prev, data.msg]);
       props.addFriend(props.displayChatName);
 
-      setSender(data.msg.sender);
       socket.emit('newMessage', data.msg);
+      moveToTop(props.displayChatName)
   
       return data;
 
@@ -154,14 +152,27 @@ const IndividualChat = (props) => {
     }
   };
 
-  useEffect(() => {
-    const today = getDay();
-    if(day !== today) {
-      setCurrentDay(false)
-    } else {
-      setCurrentDay(true)
+  function moveToTop(value) {
+    let friendList = JSON.parse(localStorage.getItem('friends'));
+  
+    if (!Array.isArray(friendList)) {
+      console.log('Invalid friend list');
+      return;
     }
-  }, [day])
+  
+    const index = friendList.indexOf(value);
+  
+    if (index === -1) {
+      console.log('Friend not found');
+      return;
+    }
+
+    const element = friendList.splice(index, 1)[0];
+  
+    friendList.unshift(element);
+    localStorage.setItem('friends', JSON.stringify(friendList));
+  };
+
 
   useEffect(() => {
     socket.on('message', (receivedMessage) => {
@@ -178,6 +189,13 @@ const IndividualChat = (props) => {
       socket.off('message');
     };
   }, []);
+
+
+  useEffect(() => {
+    if(scrollRef.current) {
+      scrollRef.current.scrollIntoView();
+    }
+  }, [props.histMsg])
   
 
   return (
@@ -233,6 +251,7 @@ const IndividualChat = (props) => {
                       sender={data.sender} 
                       user_1={user_1} />
                     </div>
+                    <div ref={scrollRef}></div>
                   </>
                 ))
               }
