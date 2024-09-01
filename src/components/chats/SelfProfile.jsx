@@ -6,13 +6,13 @@ import { IoCameraSharp } from 'react-icons/io5';
 import { GrSend } from 'react-icons/gr';
 
 const SelfProfile = (props) => {
-  
+
   const [profiles, setProfiles] = useState(JSON.parse(localStorage.getItem('profiles')));
   const mainUser = profiles.mainUser;
 
   const fileInputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
-  const [picPath, setPicPath] = useState('');
+  const [picPath, setPicPath] = useState(profiles[mainUser].picture);
   const [name, setName] = useState('');
   const [nameEdit, setNameEdit] = useState(profiles[mainUser].name);
   const [bioEdit, setBioEdit] = useState(profiles[mainUser].bio);
@@ -114,7 +114,7 @@ const SelfProfile = (props) => {
         <section className='profilePicture'>
           <div>
             {profiles[mainUser].picture ? (
-              <img className='profilePhoto' src={profiles[mainUser].picture} alt='profile picture' style={{ width: 100, height: 100 }} />
+              <img className='profilePhoto' src={picPath} alt='profile picture' style={{ width: 100, height: 100 }} />
             ) : (
               <FaUserCircle size={'15vw'} color='rgb(209, 209, 209)' />
             )}

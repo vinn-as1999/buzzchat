@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ChatBttn from './ChatBttn.jsx';
+import NoFriends from '../NoFriends.jsx';
 
 const ChatsDisplay = (props) => {
   const friendsArray = localStorage.getItem('friends');
@@ -17,7 +18,7 @@ const ChatsDisplay = (props) => {
               key={index}>
               <ChatBttn name={friend} getMessages={props.getMessages} profile={props.profile} home={props.home} histMsg={props.histMsg} />
             </div>)
-          ) : (<div>Nada</div>)
+          ) : (<NoFriends />)
         }
       </section>
     </>

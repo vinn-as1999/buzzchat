@@ -191,15 +191,8 @@ const Home = (props) => {
         }
     }, [props.isToken]);
 
-
-    useEffect(() => {
-        console.log('profiles ', profile)
-    
-    }, [histMsg])
-
-
     const home = new HomeInterface();
-    const conditionalStyle1 = {color: '#D0B7D1'}
+    const conditionalStyle1 = {color: 'white'}
     const conditionalStyle2 = {color: '#ce31fd', backgroundColor: 'beige'}
 
   return (
@@ -275,6 +268,7 @@ const Home = (props) => {
                     />
                 ) : selfProfile === true ? (
                     <SelfProfile profile={profile}
+                    setProfile={setProfile}
                     home={home}
                     displayChatName={displayChatName} />
                 ) :

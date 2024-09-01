@@ -25,11 +25,11 @@ const styles = {
     },
     searchBttn: {
         fontSize: '10vw',
-        color: '#5D3C56',
+        color: 'rebeccapurple',
         opacity: 0.5
     },
     searchMsg: {
-        color: '#8E477E',
+        color: 'rebeccapurple',
         textAlign: 'center',
         opacity: 0.5,
         fontSize: 30,
