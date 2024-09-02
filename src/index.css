@@ -233,7 +233,6 @@ sidebar {
     color: rgb(137, 72, 202);
     display: flex;
     align-items: center;
-    justify-content: center;
     font-weight: bold;
     font-size: 30px;
 }
