@@ -37,7 +37,6 @@ const UserSearchs = (props) => {
           ) : null)) 
           : <SearchMsg />
         }
-
       </section>
     </>
   )
