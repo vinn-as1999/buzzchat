@@ -56,7 +56,7 @@ const ChatBttn = (props) => {
         <div style={{width: '10vh'}}>
           {
             profiles[props.name] && profiles[props.name].picture ? 
-            <img style={{width: 50, height: 50, borderRadius: '50%'}} 
+            <img style={{width: 50, height: 50, borderRadius: '50%', margin: 10}} 
               src={profiles[props.name].picture} alt="profile picture" /> : 
             <FaUserCircle size={50} style={{
               margin: 10,

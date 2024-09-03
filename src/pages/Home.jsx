@@ -193,7 +193,7 @@ const Home = (props) => {
 
     const home = new HomeInterface();
     const conditionalStyle1 = {color: 'white'}
-    const conditionalStyle2 = {color: '#ce31fd', backgroundColor: 'beige'}
+    const conditionalStyle2 = {color: '#ce31fd', backgroundColor: 'white'}
 
   return (
     <>

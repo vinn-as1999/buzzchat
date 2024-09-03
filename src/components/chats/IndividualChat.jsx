@@ -176,7 +176,6 @@ const IndividualChat = (props) => {
 
   useEffect(() => {
     socket.on('message', (receivedMessage) => {
-      // Adiciona a mensagem ao histórico apenas se ela não já estiver lá
       props.setHistMsg((prev) => {
         if (prev.find(msg => msg.id === receivedMessage.id)) {
           return prev;

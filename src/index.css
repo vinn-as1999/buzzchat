@@ -34,7 +34,7 @@ button:hover {
 main {
     display: flex;
     justify-content: start;
-    background-color: beige;
+    background-color: white;
     height: 100vh;
     overflow: hidden;
 }
@@ -217,7 +217,7 @@ sidebar {
 }
 
 .chatBttn:hover {
-    background-color: beige;
+    background-color: beige
 }
 
 .chatBttnUsr {
@@ -247,6 +247,11 @@ sidebar {
     width: 50vw;
     height: 100vh;
     animation: chatEntrance 0.3s forwards;
+}
+
+.userInfo > header {
+    background: linear-gradient(to bottom, rgb(189, 124, 202), rgb(255, 255, 255))!important;
+
 }
 
 .dayBallon {

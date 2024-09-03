@@ -24,9 +24,9 @@ function UserProfile(props) {
           </div>
           {
             profiles[username].picture ? <img className='profilePhoto' src={profiles[username].picture} alt="profile picture" /> : 
-            <FaUserCircle size={200} color='rgb(209, 209, 209)' />
+            <FaUserCircle size={200} color='white' />
           }
-          <div style={{color: 'grey'}}>
+          <div style={{color: 'white', margin: 10, cursor: 'default'}}>
               Online
           </div>
         </header>
@@ -39,7 +39,7 @@ function UserProfile(props) {
             {profiles[username].name}
         </section>
 
-        <section className={props.profile.bio ? 'displayBio' : 'noBio'}>
+        <section className={profiles[username].bio ? 'displayBio' : 'noBio'}>
           <div style={{whiteSpace: 'pre-line', marginLeft: 10}}>
             {profiles[username].bio}
           </div>
