@@ -11,6 +11,7 @@ const SelfProfile = (props) => {
   const mainUser = profiles.mainUser;
 
   const fileInputRef = useRef(null);
+  const dialogRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [picPath, setPicPath] = useState(profiles[mainUser].picture);
   const [name, setName] = useState('');
@@ -114,7 +115,7 @@ const SelfProfile = (props) => {
         <section className='profilePicture'>
           <div>
             {profiles[mainUser].picture ? (
-              <img className='profilePhoto' src={picPath} alt='profile picture' style={{ width: 100, height: 100 }} />
+              <img className='profilePhoto' src={picPath} alt='profile picture' style={{ width: 100, height: 100 }} onClick={() => dialogRef.current.showModal()} />
             ) : (
               <FaUserCircle size={'15vw'} color='rgb(209, 209, 209)' />
             )}
@@ -133,6 +134,16 @@ const SelfProfile = (props) => {
         </section>
         <section style={{ color: 'grey' }}>Online</section>
       </header>
+
+      <dialog ref={dialogRef}>
+        <div className='imgDialog'>
+          <div className='closeBttn'
+            onClick={() => dialogRef.current.close()}>
+            <MdClose size={50} />
+          </div>
+          <img src={picPath} />
+        </div>
+      </dialog>
 
       <section style={{ cursor: 'default' }}>
         {mainUser}
