@@ -49,13 +49,13 @@ sidebar {
 
  dialog {
     background-color: rgba(2, 2, 2, 0.8);
-    display: flex;
     align-items: center;
     justify-content: center;
     width: 100vw;
     height: 100vh;
     border: none;
     margin: 0;
+    padding: 50px;
  }
 
  dialog img {
@@ -433,7 +433,8 @@ sidebar {
     width: 15vw !important;
     height: 15vw !important;
     border-radius: 50%;
-    object-fit: cover
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .displayBio {
