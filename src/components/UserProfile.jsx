@@ -25,11 +25,13 @@ function UserProfile(props) {
           </div>
 
           <dialog ref={dialogRef}>
-            <div className='closeBttn' 
-              onClick={() => dialogRef.current.close()}>
-              <MdClose size={50} />
+            <div className='imgDialog'>
+              <div className='closeBttn'
+                onClick={() => dialogRef.current.close()}>
+                <MdClose size={50} />
+              </div>
+              <img src={profiles[username].picture} />
             </div>
-            <div className='imgDialog'><img src={profiles[username].picture} /></div>
           </dialog>
 
           {

@@ -62,6 +62,12 @@ sidebar {
     width: 40vw;
  }
 
+ .imgDialog {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+ }
+
 /* LOGIN STYLES 
 ===========================================
 */
