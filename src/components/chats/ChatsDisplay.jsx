@@ -6,6 +6,19 @@ import { FaRocketchat } from 'react-icons/fa';
 const ChatsDisplay = (props) => {
   const friendsArray = localStorage.getItem('friends');
   const friends = JSON.parse(friendsArray);
+  const [friendsDisplay, setFriendsDisplay] = useState(friends);
+  const [term, setTerm] = useState();
+
+  function searchFriends(term) {
+    if (term) {
+      const userFriends = friends.filter(friend => friend.includes(term));
+      setFriendsDisplay(userFriends);
+
+    } else {
+      setFriendsDisplay(friends);
+
+    }
+  };
   
   return (
     <>
@@ -16,10 +29,11 @@ const ChatsDisplay = (props) => {
             <span style={{color: '#A537C4'}}>Chat</span>
           </div><FaRocketchat color= '#A537C4' />
         </div>
-        <input style={{width: '34vw', borderColor: 'grey'}} type="text" 
-        placeholder='Search for chats' autoFocus="true" /> {/* it doesn't works for a while*/}
+        <input style={{width: '34vw', borderColor: 'grey'}} type="text"
+          placeholder='Search for chats' autoFocus="true" 
+          onChange={(e) => {searchFriends(e.target.value)}} />
         {
-          friends && friends.length > 0 ? friends.map((friend, index) => (
+          friendsDisplay && friendsDisplay.length > 0 ? friendsDisplay.map((friend, index) => (
             <div onClick={() => {props.setDisplayChatName(friend); 
               props.home.displayChat()}}
               key={index}>

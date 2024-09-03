@@ -17,9 +17,9 @@ function UserProfile(props) {
       <main className='userInfo'>
         <header>
           <div className='closeUI'>
-            <div style={{cursor: 'pointer'}}
+            <div className='closeBttn'
               onClick={props.home.closeChat}>
-              <MdClose size={50} color='brown' />
+              <MdClose size={50} />
             </div>
           </div>
           {

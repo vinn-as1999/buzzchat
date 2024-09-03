@@ -44,7 +44,7 @@ sidebar {
     flex-direction: column;
     height: 100vh;
     width: 6vw;
-    background: linear-gradient(to right, rgb(168, 51, 204), rgb(207, 57, 245));
+    background: linear-gradient(to right, rgb(210, 114, 240), rgb(207, 57, 245));
 }
 
 /* LOGIN STYLES 
@@ -298,6 +298,7 @@ sidebar {
     color:#ffffff;
     cursor: pointer;
     margin-right: 10px;
+    transition: none;
 }
 
 .closeBttn:hover {
@@ -337,8 +338,8 @@ sidebar {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 86vh;
-    max-height: 86vh;
+    height: 87vh;
+    max-height: 87vh;
     padding: 5px;
     overflow: auto;
 }
