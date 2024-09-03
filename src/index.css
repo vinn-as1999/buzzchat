@@ -47,6 +47,21 @@ sidebar {
     background: linear-gradient(to right, rgb(210, 114, 240), rgb(207, 57, 245));
 }
 
+ dialog {
+    background-color: rgba(2, 2, 2, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    border: none;
+    margin: 0;
+ }
+
+ dialog img {
+    width: 40vw;
+ }
+
 /* LOGIN STYLES 
 ===========================================
 */

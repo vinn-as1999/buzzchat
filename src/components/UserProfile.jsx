@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FaUserCircle } from 'react-icons/fa'
 import { MdBlock, MdClose } from "react-icons/md"
 import { GrDislike } from "react-icons/gr"
@@ -7,6 +7,7 @@ import { GrDislike } from "react-icons/gr"
 function UserProfile(props) {
   const username = props.displayChatName;
   const profiles = JSON.parse(localStorage.getItem('profiles'));
+  const dialogRef = useRef(null);
 
   useEffect(() => {
     console.log('A bio está aqui', profiles[username].bio)
@@ -22,8 +23,17 @@ function UserProfile(props) {
               <MdClose size={50} />
             </div>
           </div>
+
+          <dialog ref={dialogRef}>
+            <div className='closeBttn' 
+              onClick={() => dialogRef.current.close()}>
+              <MdClose size={50} />
+            </div>
+            <img src={profiles[username].picture} />
+          </dialog>
+
           {
-            profiles[username].picture ? <img className='profilePhoto' src={profiles[username].picture} alt="profile picture" /> : 
+            profiles[username].picture ? <img className='profilePhoto' src={profiles[username].picture} alt="profile picture" onClick={() => dialogRef.current.showModal()} /> : 
             <FaUserCircle size={200} color='white' />
           }
           <div style={{color: 'white', margin: 10, cursor: 'default'}}>
