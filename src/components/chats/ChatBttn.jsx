@@ -70,7 +70,7 @@ const ChatBttn = (props) => {
         <dialog ref={dialogRef}>
             <div className='imgDialog'>
               <div className='closeBttn'
-                onClick={() => dialogRef.current.close()}>
+                onClick={(e) => {dialogRef.current.close(); e.stopPropagation()}}>
                 <MdClose size={50} />
               </div>
               <img src={profiles[props.name].picture} />
