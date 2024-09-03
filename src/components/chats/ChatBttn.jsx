@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { FaUserCircle } from "react-icons/fa"
+import { MdClose } from 'react-icons/md'
 
 const ChatBttn = (props) => {
   const queryUrl = `http://localhost:3333/api/friendId`;
-  const profiles = JSON.parse(localStorage.getItem('profiles'))
+  const profiles = JSON.parse(localStorage.getItem('profiles'));
+  const dialogRef = useRef(null);
   const [idRef, setIdRef] = useState('');
 
   async function conversationChecker(data) {
@@ -57,13 +59,23 @@ const ChatBttn = (props) => {
           {
             profiles[props.name] && profiles[props.name].picture ? 
             <img style={{width: 50, height: 50, borderRadius: '50%', margin: 10}} 
-              src={profiles[props.name].picture} alt="profile picture" /> : 
+              src={profiles[props.name].picture} alt="profile picture" 
+              onClick={(e) => {dialogRef.current.showModal(); e.stopPropagation()}} /> : 
             <FaUserCircle size={50} style={{
               margin: 10,
               color: '#D0D0D0'
             }} /> 
           }
         </div>
+        <dialog ref={dialogRef}>
+            <div className='imgDialog'>
+              <div className='closeBttn'
+                onClick={() => dialogRef.current.close()}>
+                <MdClose size={50} />
+              </div>
+              <img src={profiles[props.name].picture} />
+            </div>
+          </dialog>
         <div>
           <header className='chatBttnUsr'>
             {props.name}
