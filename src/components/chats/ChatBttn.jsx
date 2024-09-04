@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FaUserCircle } from "react-icons/fa"
 import { MdClose } from 'react-icons/md'
 
@@ -8,6 +8,7 @@ const ChatBttn = (props) => {
   const dialogRef = useRef(null);
   const [idRef, setIdRef] = useState('');
 
+  
   async function conversationChecker(data) {
     console.log('aqui as informações', profiles[props.name])
     if (data) {
@@ -26,6 +27,7 @@ const ChatBttn = (props) => {
       console.log('Sem dados')
     }
   };
+
 
   async function getFriendId() {
     await fetch(queryUrl, {
@@ -67,15 +69,23 @@ const ChatBttn = (props) => {
             }} /> 
           }
         </div>
-        <dialog ref={dialogRef}>
-            <div className='imgDialog'>
-              <div className='closeBttn'
-                onClick={(e) => {dialogRef.current.close(); e.stopPropagation()}}>
-                <MdClose size={50} />
-              </div>
-              <img src={profiles[props.name].picture} />
-            </div>
-          </dialog>
+
+        {
+          profiles[props.name] && (
+            <>
+              <dialog ref={dialogRef}>
+                <div className='imgDialog'>
+                  <div className='closeBttn'
+                    onClick={(e) => {dialogRef.current.close(); e.stopPropagation()}}>
+                    <MdClose size={50} />
+                  </div>
+                  <img src={profiles[props.name].picture} />
+                </div>
+              </dialog>
+            </>
+          )
+        }
+
         <div>
           <header className='chatBttnUsr'>
             {props.name}

@@ -7,7 +7,6 @@ const ChatsDisplay = (props) => {
   const friendsArray = localStorage.getItem('friends');
   const friends = JSON.parse(friendsArray);
   const [friendsDisplay, setFriendsDisplay] = useState(friends);
-  const [term, setTerm] = useState();
 
   function searchFriends(term) {
     if (term) {

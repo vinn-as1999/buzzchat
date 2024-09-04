@@ -19,12 +19,11 @@ const Home = (props) => {
     const [users, setUsers] = useState(false);
     const [selfProfile, setSelfProfile] = useState(false);
     const [userInfo, setUserInfo] = useState(false);
-
+    const [term, setTerm] = useState('');
     const [profile, setProfile] = useState(() => {
         const storedProfiles = localStorage.getItem('profiles');
         return storedProfiles ? JSON.parse(storedProfiles) : {};
       });
-    const [term, setTerm] = useState('');
     const [userList, setUserList] = useState([]);
     const [histMsg, setHistMsg] = useState([]);
     const [friends, setFriends] = useState(() => {
@@ -82,6 +81,10 @@ const Home = (props) => {
 
 
         async displayUserInfo(user) {
+            if (profile[user] || profile[profile.mainUser]) {
+                this.displaySelfProfile();
+            };
+
             const getProfileUrl = `http://localhost:3333/api/getProfile?param=${(user)}`
             const response = await fetch(getProfileUrl, {
                 method: 'GET',
@@ -90,17 +93,21 @@ const Home = (props) => {
                 }
             });
 
-            const data = await response.json();
+            if (response.ok) {
+                const data = await response.json();
 
-            if (user === localStorage.getItem('id')) {
-                this.displaySelfProfile();
-                this.saveProfileInfo(data);
+                if (user === localStorage.getItem('id')) {
+                    this.displaySelfProfile();
+                    this.saveProfileInfo(data);
+                } else {
+                    setUserInfo(true);
+                    this.saveProfileInfo(data);
+                }
+    
+                return data;
             } else {
-                setUserInfo(true);
-                this.saveProfileInfo(data);
+                console.log('Error fetching data')
             }
-
-            return data;
         };
 
         displaySelfProfile() {
@@ -108,7 +115,6 @@ const Home = (props) => {
             setChat(false);
             setUserInfo(false);
             setUsers(false);
-
         };
 
         closeChat() {
@@ -118,29 +124,6 @@ const Home = (props) => {
         };
     };
     
-
-    function searchUsers() {
-      const queryUrl = `http://localhost:3333/api/getchats?searchTerm=${encodeURIComponent(term)}`
-      fetch(queryUrl, {
-          method: 'GET',
-          headers: {
-              'Content-Type': 'application/json'
-          } 
-      }).then(response => response.json())
-        .then(data => {
-        const list = data.chats;
-        const usernames = list.filter(user => user.username
-            .toLowerCase()
-            .includes(term.toLowerCase()))
-            .map(user => {
-                if (user._id !== localStorage.getItem('id')) {
-                    return user.username;
-                }
-            });
-        term && setUserList(usernames) || !term && setUserList([]);
-        });
-    };
-
 
     function addFriend(name) {
         if (!name || name === profile.mainUser || friends.includes(name)) {
@@ -191,9 +174,11 @@ const Home = (props) => {
         }
     }, [props.isToken]);
 
+
     const home = new HomeInterface();
-    const conditionalStyle1 = {color: 'white'}
-    const conditionalStyle2 = {color: '#ce31fd', backgroundColor: 'white'}
+    const conditionalStyle1 = {color: 'white'};
+    const conditionalStyle2 = {color: '#ce31fd', backgroundColor: 'white'};
+
 
   return (
     <>
@@ -235,12 +220,10 @@ const Home = (props) => {
                 (<ChatsDisplay home={home} 
                     userList={userList} getMessages={getMessages} 
                     friends={friends} setDisplayChatName={setDisplayChatName} 
-                    searchUsers={searchUsers} term={term} setTerm={setTerm}
                     profile={profile} histMsg={histMsg}
                 />) :
-                (<UserSearchs home={home} term={term} 
-                    setTerm={setTerm} userList={userList}
-                    searchUsers={searchUsers} setDisplayChatName={setDisplayChatName} 
+                (<UserSearchs term={term} setTerm={setTerm} home={home} userList={userList}
+                    setUserList={setUserList} setDisplayChatName={setDisplayChatName} 
                     getMessages={getMessages} setEmpty={setEmpty} addFriend={addFriend}
                     profile={profile} 
                 />)

@@ -7,7 +7,7 @@ import { GrSend } from 'react-icons/gr';
 
 const SelfProfile = (props) => {
 
-  const [profiles, setProfiles] = useState(JSON.parse(localStorage.getItem('profiles')));
+  const profiles = props.profile;
   const mainUser = profiles.mainUser;
 
   const fileInputRef = useRef(null);
@@ -21,7 +21,7 @@ const SelfProfile = (props) => {
 
   const fetchProfiles = () => {
     const updatedProfiles = JSON.parse(localStorage.getItem('profiles'));
-    setProfiles(updatedProfiles);
+    props.setProfile(updatedProfiles);
   };
 
   const sendProfileInfo = async (data) => {
