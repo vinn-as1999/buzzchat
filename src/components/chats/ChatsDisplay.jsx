@@ -52,6 +52,6 @@ const ChatsDisplay = (props) => {
       </section>
     </>
   )
-}
+};
 
 export default ChatsDisplay;
