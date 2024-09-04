@@ -229,16 +229,17 @@ sidebar {
     display: flex;
     align-items: center;
     cursor: pointer;
-    border-radius: 5px;
     margin: 5px;
     padding: 5px;
     width: 34vw;
     height: 10vh;
-    transition: ease-in-out 0.3s;
 }
 
 .chatBttn:hover {
-    background-color: beige
+    background-color: beige;
+    border-left: solid;
+    border-width: 5px;
+    border-color: #aa3bad;
 }
 
 .chatBttnUsr {
@@ -271,7 +272,7 @@ sidebar {
 }
 
 .userInfo > header {
-    background: linear-gradient(to bottom, rgb(189, 124, 202), rgb(255, 255, 255))!important;
+    background: linear-gradient(to bottom, rgb(80, 35, 88), rgb(255, 255, 255))!important;
 
 }
 
