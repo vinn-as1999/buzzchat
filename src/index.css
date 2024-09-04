@@ -256,9 +256,21 @@ sidebar {
 .homePageTitle {
     color: rgb(137, 72, 202);
     display: flex;
-    align-items: center;
+    flex-direction: column;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.homeGreetings {
+    font-size: 40px;
+    max-width: 45vw;
+    animation: emptyEntrance 0.3s linear forwards;
+    color: rgb(157, 80, 209);
 }
 
 /* CHAT DISPLAY */

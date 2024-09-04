@@ -33,11 +33,15 @@ const UserSearchs = (props) => {
   return (
     <>
       <section className='users'>
-        <div className='homePageTitle'>
-          <div style={{padding: '0px 10px'}}>
+      <div className='homePageTitle'>
+          <div className='logo'>
             <span>Buzz</span>
             <span style={{color: '#A537C4'}}>Chat</span>
-          </div><FaRocketchat color= '#A537C4' />
+            <FaRocketchat color= '#A537C4' />
+          </div>
+          <div className='homeGreetings'>
+            Search for new friends!
+          </div>
         </div>
         <div style={{display: 'flex', alignItems: 'center'}}>
           <input style={{width: '29vw', borderColor: 'grey'}} type="text" placeholder='Search for users' onChange={(e) => props.setTerm(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && searchUsers()}

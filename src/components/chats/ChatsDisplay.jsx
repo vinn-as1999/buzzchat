@@ -7,6 +7,7 @@ const ChatsDisplay = (props) => {
   const friendsArray = localStorage.getItem('friends');
   const friends = JSON.parse(friendsArray);
   const [friendsDisplay, setFriendsDisplay] = useState(friends);
+  const mainUser = props.profile.mainUser;
 
   function searchFriends(term) {
     if (term) {
@@ -23,10 +24,18 @@ const ChatsDisplay = (props) => {
     <>
       <section className='chats'>
         <div className='homePageTitle'>
-          <div style={{padding: '0px 10px'}}>
+          <div className='logo'>
             <span>Buzz</span>
             <span style={{color: '#A537C4'}}>Chat</span>
-          </div><FaRocketchat color= '#A537C4' />
+            <FaRocketchat color= '#A537C4' />
+          </div>
+          <div className='homeGreetings'>
+            { 
+              props.profile[mainUser].name &&
+              `Welcome, ${props.profile[mainUser].name}!` ||
+              `Welcome, my friend!`
+            }
+          </div>
         </div>
         <input style={{width: '34vw', borderColor: 'grey'}} type="text"
           placeholder='Search for chats' autoFocus="true" 
