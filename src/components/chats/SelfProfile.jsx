@@ -108,8 +108,8 @@ const SelfProfile = (props) => {
     <main className='userInfo'>
       <header>
         <section className='closeUI'>
-          <div style={{ cursor: 'pointer' }} onClick={props.home.closeChat}>
-            <MdClose size={50} color='brown' />
+          <div className='closeBttn' onClick={props.home.closeChat}>
+            <MdClose size={50} />
           </div>
         </section>
         <section className='profilePicture'>
