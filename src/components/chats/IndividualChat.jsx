@@ -131,10 +131,9 @@ const IndividualChat = (props) => {
           await props.setHistMsg(prev => [...prev, message]);
           setMessage('');
         }
-        
+
       } else {
         console.log('já tem chat: ', conversation)
-  
         const infoObj = {
           convId: conversation.chat,
           sender: user_1
@@ -145,10 +144,8 @@ const IndividualChat = (props) => {
         setMessage('');
       }
 
-
     } catch(err) {
       console.log('erro ao buscar conversa', err)
-
     }
   };
 
