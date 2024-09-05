@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import ChatBttn from './ChatBttn.jsx';
-import NoFriends from '../NoFriends.jsx';
-import { FaRocketchat } from 'react-icons/fa';
+import ChatBttn from './ChatBttn.jsx'
+import NoFriends from '../NoFriends.jsx'
+import { FaRocketchat } from 'react-icons/fa'
+import { io } from 'socket.io-client'
 
 const ChatsDisplay = (props) => {
   const friendsArray = localStorage.getItem('friends');
   const friends = JSON.parse(friendsArray);
   const [friendsDisplay, setFriendsDisplay] = useState(friends);
   const mainUser = props.profile.mainUser;
+
+  const socket = io('http://localhost:3333');
 
   function searchFriends(term) {
     if (term) {
@@ -19,6 +22,16 @@ const ChatsDisplay = (props) => {
 
     }
   };
+
+  useEffect(() => {
+    socket.on('receivedMessage', (message) => {
+      console.log('a mensagem: ', message)
+    });
+  
+    return () => {
+      socket.off('receivedMessage');  // Limpa o listener ao desmontar o componente
+    };
+  }, []);
   
   return (
     <>

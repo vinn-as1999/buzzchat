@@ -71,6 +71,7 @@ const IndividualChat = (props) => {
         body: JSON.stringify({
           conversation_id: info.convId,
           sender: info.sender,
+          receiver: user_2,
           content: message,
           day: getDay(),
           hour: getHour()
