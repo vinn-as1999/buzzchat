@@ -173,6 +173,8 @@ const IndividualChat = (props) => {
 
 
   useEffect(() => {
+    socket.emit('join', user_1);
+    
     socket.on('message', (receivedMessage) => {
       props.setHistMsg((prev) => {
         if (prev.find(msg => msg.id === receivedMessage.id)) {
