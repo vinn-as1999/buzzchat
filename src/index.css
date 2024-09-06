@@ -275,6 +275,11 @@ sidebar {
 
 /* CHAT DISPLAY */
 
+.chatsdiv {
+    border-left: solid rgb(250, 158, 245);
+    margin: 10px;
+}
+
 .chatDisplay, .userInfo { 
     display: flex;
     flex-direction: column;

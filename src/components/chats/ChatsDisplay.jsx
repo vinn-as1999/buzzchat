@@ -53,15 +53,18 @@ const ChatsDisplay = (props) => {
         <input style={{width: '34vw', borderColor: 'grey'}} type="text"
           placeholder='Search for chats' autoFocus="true" 
           onChange={(e) => {searchFriends(e.target.value)}} />
-        {
-          friendsDisplay && friendsDisplay.length > 0 ? friendsDisplay.map((friend, index) => (
-            <div onClick={() => {props.setDisplayChatName(friend); 
-              props.home.displayChat()}}
-              key={index}>
-              <ChatBttn name={friend} getMessages={props.getMessages} profile={props.profile} home={props.home} histMsg={props.histMsg} />
-            </div>)
-          ) : (<NoFriends />)
-        }
+        <div className='chatsdiv'>
+          {
+            friendsDisplay && friendsDisplay.length > 0 ? friendsDisplay.map((friend, index) => (
+              <div onClick={() => {props.setDisplayChatName(friend);
+                props.home.displayChat()}}
+                key={index}>
+                <ChatBttn name={friend} getMessages={props.getMessages} profile={props.profile} home={props.home} histMsg={props.histMsg} />
+              </div>
+              )
+            ) : (<NoFriends />)
+          }
+        </div>
       </section>
     </>
   )
