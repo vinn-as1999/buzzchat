@@ -53,7 +53,6 @@ const ChatsDisplay = (props) => {
         <input style={{width: '34vw', borderColor: 'grey'}} type="text"
           placeholder='Search for chats' autoFocus="true" 
           onChange={(e) => {searchFriends(e.target.value)}} />
-        <div className='chatsdiv'>
           {
             friendsDisplay && friendsDisplay.length > 0 ? friendsDisplay.map((friend, index) => (
               <div onClick={() => {props.setDisplayChatName(friend);
@@ -64,7 +63,6 @@ const ChatsDisplay = (props) => {
               )
             ) : (<NoFriends />)
           }
-        </div>
       </section>
     </>
   )

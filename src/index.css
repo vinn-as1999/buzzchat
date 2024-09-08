@@ -229,6 +229,7 @@ sidebar {
     display: flex;
     align-items: center;
     cursor: pointer;
+    border-radius: 10px;
     margin: 5px;
     padding: 5px;
     width: 34vw;
@@ -237,7 +238,6 @@ sidebar {
 
 .chatBttn:hover {
     background-color: beige;
-    margin-left: 20px;
 }
 
 .chatBttnUsr {

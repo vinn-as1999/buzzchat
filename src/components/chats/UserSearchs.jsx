@@ -53,8 +53,6 @@ const UserSearchs = (props) => {
           </button>
 
         </div>
-
-        <div className='chatsdiv'>
           {
             props.userList.length > 0 ? props.userList.map((user, index) => (
               user ? (
@@ -65,7 +63,6 @@ const UserSearchs = (props) => {
             ) : null))
             : <SearchMsg />
           }
-        </div>
       </section>
     </>
   )
