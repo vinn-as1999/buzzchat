@@ -54,16 +54,18 @@ const UserSearchs = (props) => {
 
         </div>
 
-        { 
-          props.userList.length > 0 ? props.userList.map((user, index) => (
-            user ? (
-            <div key={index} className='newChats' onClick={() => {props.home.displayChat(); 
-              props.setDisplayChatName(user)}}>
-              <ChatBttn name={user} getMessages={props.getMessages} profile={props.profile} home={props.home}/>
-            </div>
-          ) : null)) 
-          : <SearchMsg />
-        }
+        <div className='chatsdiv'>
+          {
+            props.userList.length > 0 ? props.userList.map((user, index) => (
+              user ? (
+              <div key={index} className='newChats' onClick={() => {props.home.displayChat();
+                props.setDisplayChatName(user)}}>
+                <ChatBttn name={user} getMessages={props.getMessages} profile={props.profile} home={props.home}/>
+              </div>
+            ) : null))
+            : <SearchMsg />
+          }
+        </div>
       </section>
     </>
   )

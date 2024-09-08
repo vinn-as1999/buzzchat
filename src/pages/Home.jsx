@@ -81,8 +81,9 @@ const Home = (props) => {
 
 
         async displayUserInfo(user) {
-            if (profile[user] || profile[profile.mainUser]) {
+            if (user === localStorage.getItem('id')) {
                 this.displaySelfProfile();
+                return;
             };
 
             const getProfileUrl = `http://localhost:3333/api/getProfile?param=${(user)}`

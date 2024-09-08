@@ -237,9 +237,7 @@ sidebar {
 
 .chatBttn:hover {
     background-color: beige;
-    border-left: solid;
-    border-width: 5px;
-    border-color: #aa3bad;
+    margin-left: 20px;
 }
 
 .chatBttnUsr {
@@ -267,8 +265,8 @@ sidebar {
 }
 
 .homeGreetings {
-    font-size: 40px;
-    max-width: 45vw;
+    font-size: 30px;
+    max-width: 35vw;
     animation: emptyEntrance 0.3s linear forwards;
     color: rgb(157, 80, 209);
 }
