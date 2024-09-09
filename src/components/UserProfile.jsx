@@ -9,6 +9,12 @@ function UserProfile(props) {
   const profiles = JSON.parse(localStorage.getItem('profiles'));
   const dialogRef = useRef(null);
 
+  async function blockUser() {
+    // function to block user
+
+    
+  };
+
   useEffect(() => {
     console.log('A bio está aqui', profiles[username].bio)
   }, [])
@@ -72,6 +78,6 @@ function UserProfile(props) {
       </main>
     </>
   )
-}
+};
 
 export default UserProfile;
