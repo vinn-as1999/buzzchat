@@ -177,9 +177,10 @@ const IndividualChat = (props) => {
     
     socket.on('message', (receivedMessage) => {
       props.setHistMsg((prev) => {
-        if (prev.find(msg => msg.id === receivedMessage.id)) {
+        if (prev.find(msg => msg._id === receivedMessage._id)) {
           return prev;
         }
+        
         return [...prev, receivedMessage];
       });
     });
