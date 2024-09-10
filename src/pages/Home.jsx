@@ -168,16 +168,15 @@ const Home = (props) => {
 
 
     useEffect(() => {
-        socket.emit('join', localStorage.getItem('id'));
-
         const token = localStorage.getItem('token');
         if (token) {
+            socket.emit('join', localStorage.getItem('id'));
             props.setIsToken(true);
         }
         else {
             navigate('/');
         }
-    }, [props.isToken]);
+    }, []);
 
 
     const home = new HomeInterface();
