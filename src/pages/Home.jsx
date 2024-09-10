@@ -9,10 +9,12 @@ import ChatsDisplay from '../components/chats/ChatsDisplay'
 import UserSearchs from '../components/chats/UserSearchs'
 import SelfProfile from '../components/chats/SelfProfile'
 import UserProfile from '../components/UserProfile'
+import { io } from 'socket.io-client'
 
 
 const Home = (props) => {
-    const histMsgUrl = 'http://localhost:3333/api/msghistory'
+    const histMsgUrl = 'http://localhost:3333/api/msghistory';
+    const socket = io('http://localhost:3333');
     
     const navigate = useNavigate();
     const [chat, setChat] = useState(false);
@@ -166,6 +168,8 @@ const Home = (props) => {
 
 
     useEffect(() => {
+        socket.emit('join', localStorage.getItem('id'));
+
         const token = localStorage.getItem('token');
         if (token) {
             props.setIsToken(true);
