@@ -182,6 +182,8 @@ const IndividualChat = (props) => {
         return [...prev, receivedMessage];
       });
     });
+
+    socket.on('notification', notification => console.log('notificação pai', notification))
   
     return () => {
       socket.off('message');
