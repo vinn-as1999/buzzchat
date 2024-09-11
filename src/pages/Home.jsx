@@ -40,6 +40,7 @@ const Home = (props) => {
             localStorage.removeItem('token');
             localStorage.removeItem('id');
             props.setIsToken(false);
+            socket.disconnect();
             navigate('/');
         };
 

@@ -11,6 +11,7 @@ function UserProfile(props) {
 
   async function blockUser() {
     // function to block user
+    
 
     
   };
