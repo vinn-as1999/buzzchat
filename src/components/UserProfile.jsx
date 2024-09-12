@@ -11,14 +11,31 @@ function UserProfile(props) {
 
   async function blockUser() {
     // function to block user
-    
+    try {
+      const response = await fetch('http://localhost:3333/api/blockUser', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user: localStorage.getItem('id'),
+          blocked_contact: localStorage.getItem('id2')
+        })
+      })
+  
+      if (response.ok) {
+        const data = await response.json();
+  
+        console.log('Usuário bloqueado: ', data)
+      } else {
+        console.log('Erro ao bloquear usuário')
+      }
 
-    
+    } catch (error) {
+      console.log('Erro: ', error)
+    }
   };
 
-  useEffect(() => {
-    console.log('A bio está aqui', profiles[username].bio)
-  }, [])
   
   return (
     <>
@@ -66,7 +83,7 @@ function UserProfile(props) {
         
         <footer>
             <section style={{display: 'flex', flexDirection: 'column', alignItems: 'start'}}>
-                <div className='userInfoOptions'>
+                <div className='userInfoOptions' onClick={blockUser}>
                     <MdBlock size={30} color='#E23A3A' />
                     <div style={{color: '#E23A3A', padding: 10}}>Block {username}</div>
                 </div>
