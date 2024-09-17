@@ -25,6 +25,8 @@ function UserProfile(props) {
   
       if (response.ok) {
         const data = await response.json();
+        const jsonData = JSON.stringify(data);
+        localStorage.setItem('blocked', jsonData)
   
         console.log('Usuário bloqueado: ', data)
       } else {
