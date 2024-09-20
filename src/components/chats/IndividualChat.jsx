@@ -11,8 +11,6 @@ import { io } from 'socket.io-client'
 const socket = io('http://localhost:3333')
 
 const IndividualChat = (props) => {
-  const newChatUrl = 'http://localhost:3333/api/newchat'
-  const newMsgUrl = 'http://localhost:3333/api/newmsg'
   const date = new Date();
 
   const [message, setMessage] = useState('');
@@ -63,6 +61,7 @@ const IndividualChat = (props) => {
 
   async function sendMsgFunction(info) {
     if (info && message.trim()) {
+      const newMsgUrl = 'http://localhost:3333/api/newmsg';
       const response = await fetch(newMsgUrl, {
         method: 'POST',
         headers: {
@@ -95,7 +94,7 @@ const IndividualChat = (props) => {
 
   async function createChatController() {
     const ids = [user_1, user_2];
-    const queryUrl = `http://localhost:3333/api/isconversation`
+    const queryUrl = `http://localhost:3333/api/isconversation`;
 
     try {
       const info = await fetch(queryUrl, {
@@ -109,6 +108,7 @@ const IndividualChat = (props) => {
       const conversation = await info.json();
 
       if(!conversation.chat) {
+        const newChatUrl = 'http://localhost:3333/api/newchat';
         const response = await fetch(newChatUrl, {
           method: 'POST',
           headers: {
@@ -173,7 +173,8 @@ const IndividualChat = (props) => {
 
 
   useEffect(() => {    
-    socket.on('message', (receivedMessage) => {
+    socket.on('message', async (receivedMessage) => {
+      console.log('aqui a received message', receivedMessage)
       props.setHistMsg((prev) => {
         if (prev.find(msg => msg._id === receivedMessage._id)) {
           return prev;

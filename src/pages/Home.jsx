@@ -129,10 +129,12 @@ const Home = (props) => {
     };
     
 
-    function addFriend(name) {
+    async function addFriend(name) {
         if (!name || name === profile.mainUser || friends.includes(name)) {
             return;
         };
+
+        const response = await fetch()
 
         setFriends(prev => {
             const friendsArray = [...prev, name]
