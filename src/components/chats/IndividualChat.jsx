@@ -174,7 +174,6 @@ const IndividualChat = (props) => {
 
   useEffect(() => {    
     socket.on('message', async (receivedMessage) => {
-      console.log('aqui a received message', receivedMessage)
       props.setHistMsg((prev) => {
         if (prev.find(msg => msg._id === receivedMessage._id)) {
           return prev;
@@ -183,7 +182,7 @@ const IndividualChat = (props) => {
         return [...prev, receivedMessage];
       });
     });
-  
+
     return () => {
       socket.off('message');
     };

@@ -173,7 +173,6 @@ const Home = (props) => {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
-            socket.emit('join', localStorage.getItem('id'));
             props.setIsToken(true);
         }
         else {
