@@ -22,10 +22,6 @@ const Home = (props) => {
     const [selfProfile, setSelfProfile] = useState(false);
     const [userInfo, setUserInfo] = useState(false);
     const [term, setTerm] = useState('');
-    const [profile, setProfile] = useState(() => {
-        const storedProfiles = localStorage.getItem('profiles');
-        return storedProfiles ? JSON.parse(storedProfiles) : {};
-      });
     const [userList, setUserList] = useState([]);
     const [histMsg, setHistMsg] = useState([]);
     const [friends, setFriends] = useState(() => {
@@ -34,6 +30,8 @@ const Home = (props) => {
     });
     const [displayChatName, setDisplayChatName] = useState();
     const [empty, setEmpty] = useState(false);
+    const perfil = JSON.parse(localStorage.getItem('profiles'));
+    const mainUser = localStorage.getItem('username');
 
     class HomeInterface {
         handleLogout() {
@@ -62,7 +60,7 @@ const Home = (props) => {
         displayChat() {
             setChat(true);
             setUserInfo(false);
-            console.log(profile)
+            console.log(perfil)
         };
 
 
@@ -79,39 +77,21 @@ const Home = (props) => {
             };
             localStorage.setItem('profiles', JSON.stringify(updatedProfiles));
 
-            setProfile(updatedProfiles);
+            props.setProfile(updatedProfiles);
         };
 
 
         async displayUserInfo(user) {
+            const data = props.getProfileInfo();
             if (user === localStorage.getItem('id')) {
                 this.displaySelfProfile();
-                return;
-            };
-
-            const getProfileUrl = `http://localhost:3333/api/getProfile?param=${(user)}`
-            const response = await fetch(getProfileUrl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-
-                if (user === localStorage.getItem('id')) {
-                    this.displaySelfProfile();
-                    this.saveProfileInfo(data);
-                } else {
-                    setUserInfo(true);
-                    this.saveProfileInfo(data);
-                }
-    
-                return data;
             } else {
-                console.log('Error fetching data')
+                setUserInfo(true);
+                this.saveProfileInfo(data);
             }
+
+            return data;
+
         };
 
         displaySelfProfile() {
@@ -130,17 +110,34 @@ const Home = (props) => {
     
 
     async function addFriend(name) {
-        if (!name || name === profile.mainUser || friends.includes(name)) {
+        const url = 'http://localhost:3333/api/addFriend';
+        if (!name || name === mainUser || friends.includes(name)) {
             return;
         };
 
-        const response = await fetch()
-
-        setFriends(prev => {
-            const friendsArray = [...prev, name]
-            localStorage.setItem('friends', JSON.stringify(friendsArray));
-            return friendsArray;
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user: mainUser,
+                userId: localStorage.getItem('id'),
+                friendId: localStorage.getItem('id2')
+            })
         });
+
+        if (response.ok) {
+            const data = await response.json();
+
+            console.log(data);
+
+            setFriends(prev => {
+                const friendsArray = [...prev, name]
+                localStorage.setItem('friends', JSON.stringify(friendsArray));
+                return friendsArray;
+            });
+        }
     };
 
 
@@ -172,6 +169,7 @@ const Home = (props) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+        console.log('here is the perfil', perfil)
         if (token) {
             props.setIsToken(true);
         }
@@ -194,8 +192,8 @@ const Home = (props) => {
                     onClick={() => home.displayUserInfo(localStorage.getItem('id'))}
                     style={selfProfile === true ? conditionalStyle2 : conditionalStyle1}>
                     {
-                        profile[profile.mainUser] && profile[profile.mainUser].picture ? 
-                        <img src={profile[profile.mainUser].picture} style={{width: 40, height: 40, borderRadius: '50%'}} /> :
+                        perfil[mainUser] && perfil[mainUser].picture ? 
+                        <img src={perfil[mainUser].picture} style={{width: 40, height: 40, borderRadius: '50%'}} /> :
                         <FaUserCircle size={30} />
                     }
                 </div>
@@ -226,19 +224,19 @@ const Home = (props) => {
                 (<ChatsDisplay home={home} 
                     userList={userList} getMessages={getMessages} 
                     friends={friends} setDisplayChatName={setDisplayChatName} 
-                    profile={profile} histMsg={histMsg}
+                    profile={perfil} histMsg={histMsg}
                 />) :
                 (<UserSearchs term={term} setTerm={setTerm} home={home} userList={userList}
                     setUserList={setUserList} setDisplayChatName={setDisplayChatName} 
                     getMessages={getMessages} setEmpty={setEmpty} addFriend={addFriend}
-                    profile={profile} 
+                    profile={perfil} 
                 />)
             }
 
             {
                 userInfo ? (
                     <UserProfile 
-                    profile={profile}
+                    profile={perfil}
                     home={home}
                     displayChatName={displayChatName} />
                 ) : chat === true ? (
@@ -253,11 +251,12 @@ const Home = (props) => {
                         setEmpty={setEmpty} 
                         setFriends={setFriends} 
                         addFriend={addFriend} 
-                        profile={profile}
+                        profile={perfil}
                     />
                 ) : selfProfile === true ? (
-                    <SelfProfile profile={profile}
-                    setProfile={setProfile}
+                    <SelfProfile profile={perfil}
+                    setProfile={props.setProfile}
+                    getProfileInfo={props.getProfileInfo}
                     home={home}
                     displayChatName={displayChatName} />
                 ) :

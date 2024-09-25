@@ -8,7 +8,7 @@ const ChatsDisplay = (props) => {
   const friendsArray = localStorage.getItem('friends');
   const friends = JSON.parse(friendsArray);
   const [friendsDisplay, setFriendsDisplay] = useState(friends);
-  const mainUser = props.profile.mainUser;
+  const mainUser = localStorage.getItem('username')
 
   const socket = io('http://localhost:3333');
 
@@ -43,17 +43,17 @@ const ChatsDisplay = (props) => {
             <FaRocketchat color= '#A537C4' />
           </div>
           <div className='homeGreetings'>
-            { 
+            { /*
               props.profile[mainUser].name &&
               `Welcome, ${props.profile[mainUser].name}!` ||
               `Welcome, my friend!`
-            }
+            */}
           </div>
         </div>
         <input style={{width: '34vw', borderColor: 'grey'}} type="text"
           placeholder='Search for chats' autoFocus="true" 
           onChange={(e) => {searchFriends(e.target.value)}} />
-          {
+          { /*
             friendsDisplay && friendsDisplay.length > 0 ? friendsDisplay.map((friend, index) => (
               <div onClick={() => {props.setDisplayChatName(friend);
                 props.home.displayChat()}}
@@ -62,7 +62,7 @@ const ChatsDisplay = (props) => {
               </div>
               )
             ) : (<NoFriends />)
-          }
+          */}
       </section>
     </>
   )

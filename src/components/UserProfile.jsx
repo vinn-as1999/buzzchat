@@ -89,10 +89,6 @@ function UserProfile(props) {
                     <MdBlock size={30} color='#E23A3A' />
                     <div style={{color: '#E23A3A', padding: 10}}>Block {username}</div>
                 </div>
-                <div className='userInfoOptions'>
-                    <GrDislike size={25} color='#E23A3A' />
-                    <div style={{color: '#E23A3A', padding: 10}}>Report {username}</div>
-                </div>
             </section>
         </footer>
       </main>

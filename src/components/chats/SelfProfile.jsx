@@ -8,7 +8,7 @@ import { GrSend } from 'react-icons/gr';
 const SelfProfile = (props) => {
 
   const profiles = props.profile;
-  const mainUser = profiles.mainUser;
+  const mainUser = localStorage.getItem('username')
 
   const fileInputRef = useRef(null);
   const dialogRef = useRef(null);
@@ -40,7 +40,8 @@ const SelfProfile = (props) => {
     setNameEdit(info.name);
     setBioEdit(info.bio);
 
-    fetchProfiles()
+    props.getProfileInfo();
+    fetchProfiles();
   };
 
   const editProfile = () => {
@@ -95,7 +96,7 @@ const SelfProfile = (props) => {
     if (file) {
       setSelectedFile(file);
       setName(file.name);
-      editPicture(); // Chama a função para enviar a imagem
+      editPicture();
     }
   };
 

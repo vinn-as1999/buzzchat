@@ -33,7 +33,11 @@ const LoginForm = (props) => {
         .then(data => {
 
           data.error && props.setError(data.error);
-          data.token && [localStorage.setItem('token', data.token), localStorage.setItem('id', data.id)]
+          data.token && [
+            localStorage.setItem('token', data.token), 
+            localStorage.setItem('id', data.id),
+            localStorage.setItem('username', data.username)
+          ]
 
           fetch(restrict, {
             method: 'GET',
