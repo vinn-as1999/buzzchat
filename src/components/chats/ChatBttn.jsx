@@ -8,6 +8,29 @@ const ChatBttn = (props) => {
   const dialogRef = useRef(null);
   const [idRef, setIdRef] = useState('');
 
+
+  async function getProfileInfo(username) {
+    const getProfileUrl = `http://localhost:3333/api/getProfile?param=${username}`;
+    const response = await fetch(getProfileUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  
+    if (response.ok) {
+      const data = await response.json();
+      const prof = data.profileInfo;
+
+      localStorage.setItem('profiles', JSON.stringify({...profiles, [props.name]: prof}))
+      
+      return data.profileInfo;
+
+    } else {
+      console.log('Error fetching data');
+    }
+  }
+
   
   async function conversationChecker(data) {
     console.log('aqui as informações', profiles[props.name])
@@ -54,8 +77,8 @@ const ChatBttn = (props) => {
   };
 
   useEffect(() => {
-    props.getProfileInfo()
-  }, [])
+    getProfileInfo(props.name)
+  }, [props.name])
 
   return (
     <>
