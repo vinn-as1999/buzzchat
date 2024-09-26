@@ -35,8 +35,7 @@ const Home = (props) => {
 
     class HomeInterface {
         handleLogout() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('id');
+            localStorage.clear();
             props.setIsToken(false);
             socket.disconnect();
             navigate('/');
@@ -82,8 +81,8 @@ const Home = (props) => {
 
 
         async displayUserInfo(user) {
-            const data = props.getProfileInfo();
-            if (user === localStorage.getItem('id')) {
+            const data = await props.getProfileInfo(user);
+            if (user === localStorage.getItem('username')) {
                 this.displaySelfProfile();
             } else {
                 setUserInfo(true);
@@ -123,7 +122,7 @@ const Home = (props) => {
             body: JSON.stringify({
                 user: mainUser,
                 userId: localStorage.getItem('id'),
-                friendId: localStorage.getItem('id2')
+                friend: localStorage.getItem('id2')
             })
         });
 
@@ -189,11 +188,11 @@ const Home = (props) => {
         <main className='homePage'>
             <sidebar>
                 <div className='sidebarOpt'
-                    onClick={() => home.displayUserInfo(localStorage.getItem('id'))}
+                    onClick={() => home.displayUserInfo(localStorage.getItem('username'))}
                     style={selfProfile === true ? conditionalStyle2 : conditionalStyle1}>
                     {
-                        perfil[mainUser] && perfil[mainUser].picture ? 
-                        <img src={perfil[mainUser].picture} style={{width: 40, height: 40, borderRadius: '50%'}} /> :
+                        props.profile[mainUser] && props.profile[mainUser].picture ? 
+                        <img src={props.profile[mainUser].picture} style={{width: 40, height: 40, borderRadius: '50%'}} /> :
                         <FaUserCircle size={30} />
                     }
                 </div>
@@ -223,20 +222,20 @@ const Home = (props) => {
                 users === false ?
                 (<ChatsDisplay home={home} 
                     userList={userList} getMessages={getMessages} 
-                    friends={friends} setDisplayChatName={setDisplayChatName} 
-                    profile={perfil} histMsg={histMsg}
+                    setDisplayChatName={setDisplayChatName} 
+                    profile={props.profile} histMsg={histMsg} getProfileInfo={props.getProfileInfo}
                 />) :
                 (<UserSearchs term={term} setTerm={setTerm} home={home} userList={userList}
                     setUserList={setUserList} setDisplayChatName={setDisplayChatName} 
                     getMessages={getMessages} setEmpty={setEmpty} addFriend={addFriend}
-                    profile={perfil} 
+                    profile={props.profile} 
                 />)
             }
 
             {
                 userInfo ? (
                     <UserProfile 
-                    profile={perfil}
+                    profile={props.profile}
                     home={home}
                     displayChatName={displayChatName} />
                 ) : chat === true ? (
@@ -249,12 +248,11 @@ const Home = (props) => {
                         getMessages={getMessages} 
                         empty={empty} 
                         setEmpty={setEmpty} 
-                        setFriends={setFriends} 
                         addFriend={addFriend} 
-                        profile={perfil}
+                        profile={props.profile}
                     />
                 ) : selfProfile === true ? (
-                    <SelfProfile profile={perfil}
+                    <SelfProfile profile={props.profile}
                     setProfile={props.setProfile}
                     getProfileInfo={props.getProfileInfo}
                     home={home}

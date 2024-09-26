@@ -53,12 +53,16 @@ const ChatBttn = (props) => {
       });
   };
 
+  useEffect(() => {
+    props.getProfileInfo()
+  }, [])
+
   return (
     <>
       <section className='chatBttn'
         onClick={() => {getFriendId(); props.getMessages(localStorage.getItem(idRef))}}>
         <div style={{width: '10vh'}}>
-          {/*
+          {
             profiles[props.name] && profiles[props.name].picture ? 
             <img style={{width: 50, height: 50, borderRadius: '50%', margin: 10}} 
               src={profiles[props.name].picture} alt="profile picture" 
@@ -67,7 +71,7 @@ const ChatBttn = (props) => {
               margin: 10,
               color: '#D0D0D0'
             }} /> 
-          */}
+          }
         </div>
 
         {

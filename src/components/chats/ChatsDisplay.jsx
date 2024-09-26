@@ -5,12 +5,15 @@ import { FaRocketchat } from 'react-icons/fa'
 import { io } from 'socket.io-client'
 
 const ChatsDisplay = (props) => {
-  const friendsArray = localStorage.getItem('friends');
-  const friends = JSON.parse(friendsArray);
+  const friends = JSON.parse(localStorage.getItem('friends'));
   const [friendsDisplay, setFriendsDisplay] = useState(friends);
-  const mainUser = localStorage.getItem('username')
+  const mainUser = localStorage.getItem('username');
 
   const socket = io('http://localhost:3333');
+
+  if (!props.profile) {
+    console.log('o props.profile', props.profile)
+  }
 
   function searchFriends(term) {
     if (term) {
@@ -29,7 +32,7 @@ const ChatsDisplay = (props) => {
     });
   
     return () => {
-      socket.off('receivedMessage');  // Limpa o listener ao desmontar o componente
+      socket.off('receivedMessage');
     };
   }, []);
   
@@ -43,26 +46,26 @@ const ChatsDisplay = (props) => {
             <FaRocketchat color= '#A537C4' />
           </div>
           <div className='homeGreetings'>
-            { /*
-              props.profile[mainUser].name &&
-              `Welcome, ${props.profile[mainUser].name}!` ||
+            { 
+              props.profile[mainUser] && props.profile[mainUser].name ?
+              `Welcome, ${props.profile[mainUser].name}!` :
               `Welcome, my friend!`
-            */}
+            }
           </div>
         </div>
         <input style={{width: '34vw', borderColor: 'grey'}} type="text"
           placeholder='Search for chats' autoFocus="true" 
           onChange={(e) => {searchFriends(e.target.value)}} />
-          { /*
+          { 
             friendsDisplay && friendsDisplay.length > 0 ? friendsDisplay.map((friend, index) => (
               <div onClick={() => {props.setDisplayChatName(friend);
                 props.home.displayChat()}}
                 key={index}>
-                <ChatBttn name={friend} getMessages={props.getMessages} profile={props.profile} home={props.home} histMsg={props.histMsg} />
+                <ChatBttn name={friend} getMessages={props.getMessages} profile={props.profile} home={props.home} histMsg={props.histMsg} getProfileInfo={props.getProfileInfo} />
               </div>
               )
             ) : (<NoFriends />)
-          */}
+          }
       </section>
     </>
   )

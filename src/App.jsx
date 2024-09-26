@@ -10,16 +10,10 @@ function App() {
   const [login, setLogin] = useState(false);
   const [isToken, setIsToken] = useState(false);
   const [profile, setProfile] = useState({});
+  const [socket, setSocket] = useState(null);
 
-  const socket = io('http://localhost:3333')
-
-  if (isToken) {
-    console.log('o token', isToken)
-    socket.emit('online', localStorage.getItem('id'));
-  }
-
-  async function getProfileInfo() {
-    const getProfileUrl = `http://localhost:3333/api/getProfile?param=${localStorage.getItem('username')}`;
+  async function getProfileInfo(username) {
+    const getProfileUrl = `http://localhost:3333/api/getProfile?param=${username}`;
     const response = await fetch(getProfileUrl, {
       method: 'GET',
       headers: {
@@ -31,19 +25,22 @@ function App() {
       const data = await response.json();
       const prof = data.profileInfo;
       const username = localStorage.getItem('username');
-      const obj = {
-        [username]: prof
-      }
+      
+      setProfile(prevProfiles => {
+        const updatedProfiles = {
+          ...prevProfiles,
+          [username]: prof
+        }
 
-      localStorage.setItem('profiles', JSON.stringify(obj))
+        localStorage.setItem('profiles', JSON.stringify(updatedProfiles));
+
+        console.log(updatedProfiles)
+
+        return updatedProfiles;
+      });
       
-      setProfile(prevProfile => ({
-        ...prevProfile,
-        obj
-      }));
-      
-      
-      return data;
+      return data.profileInfo;
+
     } else {
       console.log('Error fetching data');
     }
@@ -56,16 +53,30 @@ function App() {
   async function getBlocked(params) {
     
   }
+
+  useEffect(() => {
+    const newSocket = io('http://localhost:3333', {
+      transports: ['websocket', 'polling'],
+    });
+    setSocket(newSocket);
+
+    // Desconecta o socket quando o componente desmonta
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
   
   useEffect(() => {
-    getProfileInfo()
+    getProfileInfo(localStorage.getItem('username'))
   }, [])
 
   useEffect(() => {
-    socket.on('notification', (message) => {
-      console.log('NOVA MENSAGEM PRA VOCÊ: ', message)
-    })
+    if (socket && isToken) {
+      console.log('o token', isToken)
+      socket.emit('online', localStorage.getItem('id'));
+    }
   }, [])
+
 
   return (
     <>
