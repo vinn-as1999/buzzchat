@@ -80,10 +80,9 @@ const IndividualChat = (props) => {
   
       const data = await response.json();
       props.setHistMsg(prev => [...prev, data.msg]);
-      props.addFriend(props.displayChatName);
-
-      socket.emit('newMessage', data.msg);
+      await props.addFriend(props.displayChatName);
       moveToTop(props.displayChatName)
+      socket.emit('newMessage', data.msg);
   
       return data;
 
@@ -152,6 +151,8 @@ const IndividualChat = (props) => {
 
   function moveToTop(value) {
     let friendList = JSON.parse(localStorage.getItem('friends'));
+
+    console.log('friendList', friendList)
   
     if (!Array.isArray(friendList)) {
       console.log('Invalid friend list');
@@ -169,6 +170,8 @@ const IndividualChat = (props) => {
   
     friendList.unshift(element);
     localStorage.setItem('friends', JSON.stringify(friendList));
+    props.setFriends(friendList)
+    console.log('ué, deu cerrto?')
   };
 
 

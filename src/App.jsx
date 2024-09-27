@@ -44,15 +44,15 @@ function App() {
     } else {
       console.log('Error fetching data');
     }
-  }
+  };
 
   async function getFriends(params) {
-    
-  }
+    const friendsUrl = `http://localhost:3333/api/getFriends`;
+  };
 
   async function getBlocked(params) {
     
-  }
+  };
 
   useEffect(() => {
     const newSocket = io('http://localhost:3333', {

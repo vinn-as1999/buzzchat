@@ -5,8 +5,7 @@ import { FaRocketchat } from 'react-icons/fa'
 import { io } from 'socket.io-client'
 
 const ChatsDisplay = (props) => {
-  const friends = JSON.parse(localStorage.getItem('friends'));
-  const [friendsDisplay, setFriendsDisplay] = useState(friends);
+  const [friendsDisplay, setFriendsDisplay] = useState(props.friends);
   const mainUser = localStorage.getItem('username');
 
   const socket = io('http://localhost:3333');
@@ -17,11 +16,11 @@ const ChatsDisplay = (props) => {
 
   function searchFriends(term) {
     if (term) {
-      const userFriends = friends.filter(friend => friend.includes(term));
+      const userFriends = props.friends.filter(friend => friend.includes(term));
       setFriendsDisplay(userFriends);
 
     } else {
-      setFriendsDisplay(friends);
+      setFriendsDisplay(props.friends);
 
     }
   };
@@ -35,6 +34,11 @@ const ChatsDisplay = (props) => {
       socket.off('receivedMessage');
     };
   }, []);
+
+  useEffect(() => {
+    console.log('mudou', props.friends)
+    setFriendsDisplay(props.friends)
+  }, [props.friends])
   
   return (
     <>

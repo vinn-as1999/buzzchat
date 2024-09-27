@@ -8,7 +8,6 @@ const ChatBttn = (props) => {
   const dialogRef = useRef(null);
   const [idRef, setIdRef] = useState('');
 
-
   async function getProfileInfo(username) {
     const getProfileUrl = `http://localhost:3333/api/getProfile?param=${username}`;
     const response = await fetch(getProfileUrl, {
@@ -29,22 +28,28 @@ const ChatBttn = (props) => {
     } else {
       console.log('Error fetching data');
     }
-  }
+  };
 
   
   async function conversationChecker(data) {
-    console.log('aqui as informações', profiles[props.name])
     if (data) {
-      const response = await fetch(`http://localhost:3333/api/isconversation`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'ids': encodeURIComponent(data)
-        }
-      });
+      try {
+        const response = await fetch(`http://localhost:3333/api/isconversation`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'ids': encodeURIComponent(data)
+          }
+        });
   
-      const convId = await response.json();
-      return convId.chat;
+        if (response.ok) {
+          const convId = await response.json();
+          return convId.chat;
+        }
+        
+      } catch (error) {
+        console.log('Error: ', error)
+      }
 
     } else {
       console.log('Sem dados')
@@ -85,20 +90,28 @@ const ChatBttn = (props) => {
       <section className='chatBttn'
         onClick={() => {getFriendId(); props.getMessages(localStorage.getItem(idRef))}}>
         <div style={{width: '10vh'}}>
-          {
-            profiles[props.name] && profiles[props.name].picture ? 
-            <img style={{width: 50, height: 50, borderRadius: '50%', margin: 10}} 
-              src={profiles[props.name].picture} alt="profile picture" 
-              onClick={(e) => {dialogRef.current.showModal(); e.stopPropagation()}} /> : 
-            <FaUserCircle size={50} style={{
-              margin: 10,
-              color: '#D0D0D0'
-            }} /> 
-          }
+        {
+          profiles?.[props.name]?.picture ? (
+            <img 
+              style={{ width: 50, height: 50, borderRadius: '50%', margin: 10 }} 
+              src={profiles[props.name].picture} 
+              alt="profile picture" 
+              onClick={(e) => { 
+                dialogRef.current.showModal(); 
+                e.stopPropagation(); 
+              }} 
+            />
+          ) : (
+            <FaUserCircle 
+              size={50} 
+              style={{ margin: 10, color: '#D0D0D0' }} 
+            />
+          )
+        }
         </div>
 
         {
-          profiles[props.name] && (
+          profiles?.[props.name] && (
             <>
               <dialog ref={dialogRef}>
                 <div className='imgDialog'>

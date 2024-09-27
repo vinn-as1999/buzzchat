@@ -122,7 +122,7 @@ const Home = (props) => {
             body: JSON.stringify({
                 user: mainUser,
                 userId: localStorage.getItem('id'),
-                friend: localStorage.getItem('id2')
+                friend: name
             })
         });
 
@@ -223,7 +223,10 @@ const Home = (props) => {
                 (<ChatsDisplay home={home} 
                     userList={userList} getMessages={getMessages} 
                     setDisplayChatName={setDisplayChatName} 
-                    profile={props.profile} histMsg={histMsg} getProfileInfo={props.getProfileInfo}
+                    profile={props.profile} histMsg={histMsg} 
+                    getProfileInfo={props.getProfileInfo}
+                    friends={friends}
+                    setFriends={setFriends}
                 />) :
                 (<UserSearchs term={term} setTerm={setTerm} home={home} userList={userList}
                     setUserList={setUserList} setDisplayChatName={setDisplayChatName} 
@@ -247,7 +250,9 @@ const Home = (props) => {
                         setHistMsg={setHistMsg} 
                         getMessages={getMessages} 
                         empty={empty} 
-                        setEmpty={setEmpty} 
+                        setEmpty={setEmpty}
+                        friends={friends}
+                        setFriends={setFriends}
                         addFriend={addFriend} 
                         profile={props.profile}
                     />
