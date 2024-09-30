@@ -24,10 +24,6 @@ const Home = (props) => {
     const [term, setTerm] = useState('');
     const [userList, setUserList] = useState([]);
     const [histMsg, setHistMsg] = useState([]);
-    const [friends, setFriends] = useState(() => {
-        const storedFriends = localStorage.getItem('friends');
-        return storedFriends ? JSON.parse(storedFriends) : [];
-    });
     const [displayChatName, setDisplayChatName] = useState();
     const [empty, setEmpty] = useState(false);
     const perfil = JSON.parse(localStorage.getItem('profiles'));
@@ -110,7 +106,7 @@ const Home = (props) => {
 
     async function addFriend(name) {
         const url = 'http://localhost:3333/api/addFriend';
-        if (!name || name === mainUser || friends.includes(name)) {
+        if (!name || name === mainUser || props.friends.includes(name)) {
             return;
         };
 
@@ -131,7 +127,7 @@ const Home = (props) => {
 
             console.log(data);
 
-            setFriends(prev => {
+            props.setFriends(prev => {
                 const friendsArray = [...prev, name]
                 localStorage.setItem('friends', JSON.stringify(friendsArray));
                 return friendsArray;
@@ -225,8 +221,8 @@ const Home = (props) => {
                     setDisplayChatName={setDisplayChatName} 
                     profile={props.profile} histMsg={histMsg} 
                     getProfileInfo={props.getProfileInfo}
-                    friends={friends}
-                    setFriends={setFriends}
+                    friends={props.friends}
+                    setFriends={props.setFriends}
                 />) :
                 (<UserSearchs term={term} setTerm={setTerm} home={home} userList={userList}
                     setUserList={setUserList} setDisplayChatName={setDisplayChatName} 
@@ -251,8 +247,8 @@ const Home = (props) => {
                         getMessages={getMessages} 
                         empty={empty} 
                         setEmpty={setEmpty}
-                        friends={friends}
-                        setFriends={setFriends}
+                        friends={props.friends}
+                        setFriends={props.setFriends}
                         addFriend={addFriend} 
                         profile={props.profile}
                     />
