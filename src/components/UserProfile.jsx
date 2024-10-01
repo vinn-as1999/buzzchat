@@ -18,8 +18,8 @@ function UserProfile(props) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          user: localStorage.getItem('id'),
-          blocked_contact: localStorage.getItem('id2')
+          user: localStorage.getItem('username'),
+          blocked_contact: username
         })
       })
   

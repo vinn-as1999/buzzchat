@@ -205,7 +205,7 @@ const IndividualChat = (props) => {
 
         <section>
           <header className='chatHeader'
-          onClick={() => {props.home.displayUserInfo(chatUser); console.log(chatUser)}}>
+          onClick={() => props.home.displayUserInfo(chatUser)}>
             <div style={{display: 'flex', alignItems: 'center', cursor: 'pointer'}}>
               {
                 chatProfile[chatUser] && chatProfile[chatUser].picture ?

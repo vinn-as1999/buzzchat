@@ -64,10 +64,10 @@ const Home = (props) => {
 
             const updatedProfiles = {
                 ...existingProfiles,
-                [data.profileInfo.username]: {
-                    name: data.profileInfo.name,
-                    bio: data.profileInfo.bio,
-                    picture: data.profileInfo.picture,
+                [data.username]: {
+                    name: data.name,
+                    bio: data.bio,
+                    picture: data.picture,
                 }
             };
             localStorage.setItem('profiles', JSON.stringify(updatedProfiles));
@@ -173,6 +173,8 @@ const Home = (props) => {
         }
     }, []);
 
+    useEffect(() => {console.log('o main user', mainUser, 'o profile', props.profile[mainUser])}, [props.profile[mainUser]])
+
 
     const home = new HomeInterface();
     const conditionalStyle1 = {color: 'white'};
@@ -184,7 +186,7 @@ const Home = (props) => {
         <main className='homePage'>
             <sidebar>
                 <div className='sidebarOpt'
-                    onClick={() => home.displayUserInfo(localStorage.getItem('username'))}
+                    onClick={() => home.displayUserInfo(mainUser)}
                     style={selfProfile === true ? conditionalStyle2 : conditionalStyle1}>
                     {
                         props.profile[mainUser] && props.profile[mainUser].picture ? 

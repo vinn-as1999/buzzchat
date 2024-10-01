@@ -4,7 +4,7 @@ import { MdClose } from 'react-icons/md'
 
 const ChatBttn = (props) => {
   const queryUrl = `http://localhost:3333/api/friendId`;
-  const profiles = JSON.parse(localStorage.getItem('profiles'));
+  const [profiles, setProfiles] = useState({});
   const dialogRef = useRef(null);
   const [idRef, setIdRef] = useState('');
 
@@ -21,7 +21,13 @@ const ChatBttn = (props) => {
       const data = await response.json();
       const prof = data.profileInfo;
 
-      localStorage.setItem('profiles', JSON.stringify({...profiles, [props.name]: prof}))
+      // localStorage.setItem('profiles', JSON.stringify({...profiles, [props.name]: prof}));
+      setProfiles((prev) => {
+        return {
+          ...prev, 
+          [data.profileInfo.username]: data.profileInfo
+        };
+      });
       
       return data.profileInfo;
 
@@ -83,6 +89,7 @@ const ChatBttn = (props) => {
 
   useEffect(() => {
     getProfileInfo(props.name)
+    console.log('os profiles', profiles)
   }, [props.name])
 
   return (

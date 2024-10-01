@@ -28,12 +28,12 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       const prof = data.profileInfo;
-      const username = localStorage.getItem('username');
+      console.log('o prof', prof)
       
       setProfile(prevProfiles => {
         const updatedProfiles = {
           ...prevProfiles,
-          [username]: prof
+          [prof.username]: prof
         }
 
         localStorage.setItem('profiles', JSON.stringify(updatedProfiles));
