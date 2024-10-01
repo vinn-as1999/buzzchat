@@ -36,7 +36,6 @@ const ChatsDisplay = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log('mudou', props.friends)
     setFriendsDisplay(props.friends)
   }, [props.friends])
   

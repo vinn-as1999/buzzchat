@@ -28,7 +28,6 @@ function App() {
     if (response.ok) {
       const data = await response.json();
       const prof = data.profileInfo;
-      console.log('o prof', prof)
       
       setProfile(prevProfiles => {
         const updatedProfiles = {
@@ -37,8 +36,6 @@ function App() {
         }
 
         localStorage.setItem('profiles', JSON.stringify(updatedProfiles));
-
-        console.log(updatedProfiles)
 
         return updatedProfiles;
       });
@@ -93,7 +90,6 @@ function App() {
     const username = localStorage.getItem('username')
     getProfileInfo(username)
     getFriends(username)
-    console.log('foi', username)
   }, [])
 
   useEffect(() => {

@@ -164,7 +164,6 @@ const Home = (props) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        console.log('here is the perfil', perfil)
         if (token) {
             props.setIsToken(true);
         }
@@ -172,8 +171,6 @@ const Home = (props) => {
             navigate('/');
         }
     }, []);
-
-    useEffect(() => {console.log('o main user', mainUser, 'o profile', props.profile[mainUser])}, [props.profile[mainUser]])
 
 
     const home = new HomeInterface();

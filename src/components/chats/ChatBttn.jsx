@@ -89,7 +89,6 @@ const ChatBttn = (props) => {
 
   useEffect(() => {
     getProfileInfo(props.name)
-    console.log('os profiles', profiles)
   }, [props.name])
 
   return (
