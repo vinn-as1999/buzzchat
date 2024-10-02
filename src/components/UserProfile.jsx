@@ -10,7 +10,6 @@ function UserProfile(props) {
   const dialogRef = useRef(null);
 
   async function blockUser() {
-    // function to block user
     try {
       const response = await fetch('http://localhost:3333/api/blockUser', {
         method: 'POST',

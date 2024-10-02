@@ -15,6 +15,8 @@ function App() {
     const storedFriends = localStorage.getItem('friends');
     return storedFriends ? JSON.parse(storedFriends) : [];
   });
+  const [blocked, setBlocked] = useState([]);
+
 
   async function getProfileInfo(username) {
     const getProfileUrl = `http://localhost:3333/api/getProfile?param=${username}`;
@@ -47,6 +49,7 @@ function App() {
     }
   };
 
+
   async function getFriends(name) {
     try {
       const friendsUrl = `http://localhost:3333/api/getFriends?name=${name}`;
@@ -70,8 +73,27 @@ function App() {
     }
   };
 
-  async function getBlocked(params) {
-    
+
+  async function getBlocked(name) {
+    const url = `http://localhost:3333/api/getBlocked?name=${name}`;
+    try {
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!response.ok) {
+        console.log('Error fetching data', response.status, response.statusText);
+      }
+
+      const data = await response.json();
+      console.log('os bloqueados: ', data)
+      
+    } catch (error) {
+      console.log('Network error: ', error)
+    }
   };
 
   useEffect(() => {
@@ -87,9 +109,10 @@ function App() {
   }, []);
   
   useEffect(() => {
-    const username = localStorage.getItem('username')
-    getProfileInfo(username)
-    getFriends(username)
+    const username = localStorage.getItem('username');
+    getProfileInfo(username);
+    getFriends(username);
+    getBlocked(username);
   }, [])
 
   useEffect(() => {

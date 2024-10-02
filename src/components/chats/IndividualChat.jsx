@@ -86,8 +86,6 @@ const IndividualChat = (props) => {
   
       return data;
 
-    } else {
-      console.log('problema aí: ', info.convId, info.sender)
     }
   };
 
@@ -133,7 +131,6 @@ const IndividualChat = (props) => {
         }
 
       } else {
-        console.log('já tem chat: ', conversation)
         const infoObj = {
           convId: conversation.chat,
           sender: user_1
