@@ -82,6 +82,7 @@ const Home = (props) => {
                 this.displaySelfProfile();
             } else {
                 setUserInfo(true);
+                console.log('data', data)
                 this.saveProfileInfo(data);
             }
 
@@ -97,6 +98,10 @@ const Home = (props) => {
         };
 
         closeChat() {
+            const main_user = perfil[mainUser];
+            localStorage.setItem('profiles', JSON.stringify({
+                [mainUser]: main_user
+            }))
             setChat(false);
             setUserInfo(false);
             setSelfProfile(false);

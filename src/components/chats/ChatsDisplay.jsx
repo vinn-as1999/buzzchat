@@ -64,7 +64,7 @@ const ChatsDisplay = (props) => {
               <div onClick={() => {props.setDisplayChatName(friend);
                 props.home.displayChat()}}
                 key={index}>
-                <ChatBttn name={friend} getMessages={props.getMessages} profile={props.profile} home={props.home} histMsg={props.histMsg} getProfileInfo={props.getProfileInfo} />
+                <ChatBttn name={friend} getMessages={props.getMessages} profile={props.profile} setProfile={props.setProfile} home={props.home} histMsg={props.histMsg} getProfileInfo={props.getProfileInfo} />
               </div>
               )
             ) : (<NoFriends />)

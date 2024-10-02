@@ -21,11 +21,10 @@ const ChatBttn = (props) => {
       const data = await response.json();
       const prof = data.profileInfo;
 
-      // localStorage.setItem('profiles', JSON.stringify({...profiles, [props.name]: prof}));
       setProfiles((prev) => {
         return {
           ...prev, 
-          [data.profileInfo.username]: data.profileInfo
+          [data.profileInfo.username]: prof
         };
       });
       
