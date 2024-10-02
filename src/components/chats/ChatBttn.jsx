@@ -23,10 +23,14 @@ const ChatBttn = (props) => {
       const username = data.profileInfo.username
 
       setProfiles((prev) => {
-        return {
-          ...prev, 
+        const updatedProfiles = {
+          ...prev,
           [username]: prof
         };
+
+        localStorage.setItem('profiles', JSON.stringify(updatedProfiles))
+
+        return updatedProfiles;
       });
       
       return data.profileInfo;
@@ -94,7 +98,7 @@ const ChatBttn = (props) => {
   return (
     <>
       <section className='chatBttn'
-        onClick={() => {getFriendId(); props.getMessages(localStorage.getItem(idRef))}}>
+        onClick={() => {getFriendId(); props.getMessages(localStorage.getItem(idRef)); getProfileInfo(props.name)}}>
         <div style={{width: '10vh'}}>
         {
           profiles?.[props.name]?.picture ? (

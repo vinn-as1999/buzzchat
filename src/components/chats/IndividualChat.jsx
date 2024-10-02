@@ -18,7 +18,7 @@ const IndividualChat = (props) => {
 
   const [ user_1, user_2 ] = [ localStorage.getItem('id'), localStorage.getItem('id2') ]
   const chatUser = props.displayChatName;
-  const chatProfile = props.profile;
+  const chatProfile = JSON.parse(localStorage.getItem('profiles'))
 
   function getDay() {
     const months = {
