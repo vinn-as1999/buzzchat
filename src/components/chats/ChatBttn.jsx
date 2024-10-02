@@ -20,11 +20,12 @@ const ChatBttn = (props) => {
     if (response.ok) {
       const data = await response.json();
       const prof = data.profileInfo;
+      const username = data.profileInfo.username
 
       setProfiles((prev) => {
         return {
           ...prev, 
-          [data.profileInfo.username]: prof
+          [username]: prof
         };
       });
       

@@ -63,7 +63,7 @@ const Home = (props) => {
             const existingProfiles = JSON.parse(localStorage.getItem('profiles')) || {};
 
             const updatedProfiles = {
-                ...existingProfiles,
+                [mainUser]: existingProfiles[mainUser],
                 [data.username]: {
                     name: data.name,
                     bio: data.bio,
