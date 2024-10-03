@@ -4,6 +4,7 @@ import { io } from 'socket.io-client'
 import EnterApplication from './pages/EnterApplication'
 import Home from './pages/Home'
 import './index.css'
+import { SiPocket } from 'react-icons/si'
 
 
 function App() {
@@ -113,7 +114,6 @@ function App() {
     getProfileInfo(username);
     getFriends(username);
     getBlocked(username);
-    console.log('chamou')
   }, []);
 
   useEffect(() => {
@@ -121,11 +121,25 @@ function App() {
       console.log('o token', isToken)
       socket.emit('online', localStorage.getItem('id'));
     }
-  }, [])
+  }, [socket, isToken])
 
   useEffect(() => {
     console.log('Os blocked users: ', blocked)
   }, [blocked])
+
+  useEffect(() => {
+    if (socket) {
+      socket.on('Online', (user) => {
+        console.log('Online: ', user)
+      })
+
+      return () => {
+        socket.off('Online')
+      }
+    } else {
+      console.log('Socket n conectado')
+    }
+  }, [socket])
 
 
   return (
