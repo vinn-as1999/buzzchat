@@ -89,7 +89,7 @@ function App() {
       }
 
       const data = await response.json();
-      console.log('os bloqueados: ', data)
+      setBlocked(data)
       
     } catch (error) {
       console.log('Network error: ', error)
@@ -113,7 +113,8 @@ function App() {
     getProfileInfo(username);
     getFriends(username);
     getBlocked(username);
-  }, [])
+    console.log('chamou')
+  }, []);
 
   useEffect(() => {
     if (socket && isToken) {
@@ -121,6 +122,10 @@ function App() {
       socket.emit('online', localStorage.getItem('id'));
     }
   }, [])
+
+  useEffect(() => {
+    console.log('Os blocked users: ', blocked)
+  }, [blocked])
 
 
   return (

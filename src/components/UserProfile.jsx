@@ -20,12 +20,12 @@ function UserProfile(props) {
           user: localStorage.getItem('username'),
           blocked_contact: username
         })
-      })
+      });
   
       if (response.ok) {
         const data = await response.json();
         const jsonData = JSON.stringify(data);
-        localStorage.setItem('blocked', jsonData)
+        localStorage.setItem('blocked', jsonData);
   
         console.log('Usuário bloqueado: ', data)
       } else {
